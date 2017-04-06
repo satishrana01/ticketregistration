@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+        <title>Login and Registration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+		<script type="text/javascript" src="jquery/jquery-1.8.3.min.js" charset="UTF-8"></script>
+		<script>
+		function myFunction(){
+		
+		if($('#emailsignup').val() != ""){
+					$.ajax({
+							url : "checkuser",
+							data : "emailsignup="+$('#emailsignup').val(),
+							cache : false,
+							dataType: "text",							
+							type : 'POST',
+							success : function(dataofconfirm) {
+								if(dataofconfirm == "User already exist.")
+									alert(dataofconfirm);
+								
+							}
+							
+						});
+				
+				}
+		}
+	function submitForm(){
+		
+			if($('#username').val() != "" && $('#password').val() != ""){
+					$.ajax({
+							url : "validateuser",
+							data : "emailsignup="+$('#username').val()+"&password="+$('#password').val(),
+							cache : false,
+							dataType: "text",							
+							type : 'POST',
+							success : function(dataofconfirm) {
+								
+									alert(dataofconfirm);
+								
+							}
+							
+						});
+
+		}
+		
+		}
+		$(document).ready(function() {
+    $("#phone").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+             // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    $("#mobile").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+             // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+});
+		
+		</script>
+		
+    </head>
+    <body>
+        <div class="container">
+           <div style="position: absolute; padding-left: 10px; padding-top: 2px; z-index: 999;" id="logo">
+           <a target="_blank" title="London Comic Con" href="http://www.mcmcomiccon.com/london/">
+            <img src="images/londondatebannerlogo.png"/>
+            </a></div>
+            <header>
+                <h1>Login and Registration Form </h1>
+				
+            </header>
+            <section>				
+                <div id="container_demo" >
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                            <form id="loginform" onsubmit="return false" autocomplete="on" > 
+                                <h1>Log in</h1> 
+                                <p> 
+                                    <label for="username" class="uname" data-icon="u" > Your email</label>
+                                    <input id="username" name="username" required="required" type="text" placeholder="mymail@mail.com"/>
+                                </p>
+                                <p> 
+                                    <label for="password" class="youpasswd" data-icon="p"> Your password </label>
+                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                                </p>
+                                <p class="login button"> 
+                                    <input type="submit" onclick="submitForm()" value="Login" /> 
+								</p>
+                                <p class="change_link">
+									Not a member yet ?
+									<a href="#toregister" class="to_register">Join us</a>
+								</p>
+                            </form>
+                        </div>
+
+                        <div id="register" class="animate form">
+                            <form id="signup"  action="ticketcontroller" method="post" autocomplete="on"> 
+                                <h1> Sign up </h1> 
+                                <p> 
+                                    <label for="emailsignup" class="youmail"  data-icon="e" > Your email</label>
+                                    <input id="emailsignup" name="emailsignup" onblur="myFunction()" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                </p>
+                               	<p> 
+                                    <label for="title" class="uname">Please select title </label><br>
+									<select id="title" name="title" required>
+										 <option value="">-- Select --</option>	
+										 <option value="Miss">Miss</option>
+										 <option value="Ms">Ms</option>
+										 <option value="Mr">Mr</option>
+										 <option value="Sir">Sir</option>
+										 <option value="Mrs">Mrs</option>
+										 <option value="Dr">Dr</option>
+									</select>
+                                 </p>
+								<p> 
+                                    <label for="firstname" class="uname" data-icon="u">Your firstname</label>
+                                    <input id="firstname" maxlength="25" name="firstname" type="text" placeholder="firstname" />
+                                </p>
+								<p> 
+                                    <label for="lastname" class="uname" data-icon="u">Your username</label>
+                                    <input id="lastname" name="lastname" required="required" type="text" placeholder="lastname" />
+                                </p>
+								<p> 
+                                    <label for="phone" class="uname" data-icon="u">Your phone</label>
+                                    <input id="phone" maxlength="10" name="phone" type="text" placeholder="phone" />
+                                </p>
+                                <p> 
+                                    <label for="mobile" class="uname" data-icon="u">Your Mobile</label>
+                                    <input id="mobile" maxlength="10" name="mobile" type="text" placeholder="mobile" />
+                                </p>
+								<p> 
+                                    <label for="Addressline1" class="uname" data-icon="u">Address line 1</label>
+                                    <input id="Addressline1"  maxlength="40"  name="Addressline1" required="required" type="text" placeholder="Address Line 1" />
+                                </p>
+								<p> 
+                                    <label for="Addressline2" class="uname" data-icon="u">Address line 2</label>
+                                    <input id="Addressline2"  maxlength="40"  name="Addressline2" type="text" placeholder="Address Line 2" />
+                                </p>
+								<p> 
+                                    <label for="town" class="uname" data-icon="u">Enter town</label>
+                                    <input id="town" name="town"  maxlength="40"  required="required" type="text" placeholder="Town" />
+                                </p>
+								<p> 
+                                    <label for="country" class="uname" data-icon="u">Enter country</label>
+                                    <input id="country" name="country"  maxlength="40"  required="required" type="text" placeholder="Country" />
+                                </p>
+								<p> 
+                                    <label for="date" class="uname">Date Attending </label>
+									<div class="form-group">
+										<div class="input-group date form_datetime col-md-5" data-date="1979-09-16" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
+										<input class="form-control" size="16" type="text" required="required">
+										<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+									</div>
+									<input type="hidden" id="dtp_input1" name="dtp_input1" required="required" /><br/>
+								</div>
+								<script type="text/javascript" src="js/bootstrap.min.js"></script>
+								<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+								<script type="text/javascript" src="js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+								<script type="text/javascript">
+										$('.form_datetime').datetimepicker({
+											//language:  'fr',
+											weekStart: 1,
+											todayBtn:  1,
+											autoclose: 1,
+											todayHighlight: 1,
+											startView: 2,
+											forceParse: 0,
+											showMeridian: 1
+										});
+										$('.form_date').datetimepicker({
+											language:  'fr',
+											weekStart: 1,
+											todayBtn:  1,
+											autoclose: 1,
+											todayHighlight: 1,
+											startView: 2,
+											minView: 2,
+											forceParse: 0
+										});
+										$('.form_time').datetimepicker({
+											language:  'fr',
+											weekStart: 1,
+											todayBtn:  1,
+											autoclose: 1,
+											todayHighlight: 1,
+											startView: 1,
+											minView: 0,
+											maxView: 1,
+											forceParse: 0
+										});
+									</script>								
+                                </p>
+								<p> 
+                                    <label for="pincode" class="uname" data-icon="u">Enter pincode</label>
+                                    <input id="pincode"  maxlength="9"  name="pincode" required="required" type="text" placeholder="Pincode" />
+                                </p>
+								<p> 
+                                    <label for="adultticket" class="uname">Select Adult tickets </label><br>
+									<select id="adultticket" name="adultticket" required>
+										 <option value="">-- Select --</option>	
+										 <option value="1">1</option>
+										 <option value="2">2</option>
+										 <option value="3">3</option>
+										 <option value="4">4</option>
+										 <option value="5">5</option>
+										 <option value="6">6</option>
+										 <option value="7">7</option>
+										 <option value="8">8</option>
+										 <option value="9">9</option>
+										 <option value="10">10</option>
+										 <option value="11">11</option>
+										 <option value="12">12</option>
+									</select>
+                                 </p>
+								 <p> 
+                                    <label for="childticket" class="uname">Select Child Tickets  </label><br>
+									<select id="childticket" name="childticket">
+										 <option value="">-- Select --</option>	
+										 <option value="1">1</option>
+										 <option value="2">2</option>
+										 <option value="3">3</option>
+										 <option value="4">4</option>
+										 <option value="5">5</option>
+										 <option value="6">6</option>
+										 <option value="7">7</option>
+										 <option value="8">8</option>
+										 <option value="9">9</option>
+										 <option value="10">10</option>
+										 <option value="11">11</option>
+										 <option value="12">12</option>
+									</select>
+                                 </p>
+                                <p class="signin button"> 
+									<input type="submit" value="Sign up"/> 
+								</p>
+                                <p class="change_link">  
+									Already a member ?
+									<a href="#tologin" class="to_register"> Go and log in </a>
+								</p>
+                            </form>
+                        </div>
+						
+                    </div>
+                </div>  
+            </section>
+        </div>
+    </body>
+</html>
